@@ -3,6 +3,7 @@ import { Rate } from 'antd';
 import userService from "../services/userService";
 import addressService from "../services/addressService";
 import roomService from "../services/roomService";
+import waitinglistService from "../services/waitinglistService";
 
 export const DataContext = createContext()
 // const dataPost = [
@@ -466,13 +467,23 @@ function DataProvider({children}) {
         }
     }, [dataRoom])
     
-
+    const [roomwait, setRoomwait] = useState();
+    const loadroomwait = () => {
+        waitinglistService.getuserid(localStorage.getItem("id")) //Lấy room chờ theo userid
+        .then(function (response) {
+          setRoomwait(response);
+           console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
     const value = {
         dataRoomPosted, setDataRoomPosted, dataRoomWait, setDataRoomWait,dataRoomFail ,setDataRoomFail,
         dataSourceUser, setDataSourceUser, reloadDataUser,
         dataSourceUserID, setDataSourceUserID,
         dataProvince, dataDistrict, dataWard,
-        dataRoom,
+        dataRoom, loadroomwait, roomwait, setRoomwait,
         dataRoomSearch, setDataRoomSearch
     }
     return (

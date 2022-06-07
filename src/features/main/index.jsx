@@ -11,6 +11,10 @@ import Profile from "./pages/profile";
 import { Layout } from 'antd';
 import RoomManagement from "./pages/room-management";
 import RoomList from "./pages/room-list";
+import RoomWait from "./pages/room-wait";
+import RoomShare from "./pages/room-share";
+import ShareDetail from "./pages/room-share-detail"
+import { wait } from "@testing-library/user-event/dist/utils";
 const { Header, Content, Footer } = Layout;
 
 function HomePage() {
@@ -28,6 +32,9 @@ function HomePage() {
           <Route path="/room-management/*" element={<RoomManagement />} />
           <Route path="/room-list/*" element={<RoomList />} />
           <Route path="/room-list/:id/*" element={<RoomList />} />
+          <Route path="/room-wait/*" element={<RoomWait />} />
+          <Route path="/room-share/*" element={<RoomShare />} />
+          <Route path="/room-share-detail/*" element={<ShareDetail />} />
           
           <Route path="/" element={<Home />}>
           </Route>

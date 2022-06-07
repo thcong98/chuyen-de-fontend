@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import RoomsInfo from '../rooms-info';
-import DetailsInfoRoom from './details-info-room';
 import Comment from './comment-review';
 import AppCarousel from '../carousel';
 import { useParams } from "react-router-dom";
@@ -86,7 +84,6 @@ function RoomDetail() {
   var dataCarousel
     if(dataRoomID) {
       dataCarousel = dataRoomID.documentEntities?.map(item =>{
-
         return {image: item.nameUrl, key: Math.random()};
       });
     }
@@ -131,7 +128,6 @@ function RoomDetail() {
             <div style={{marginTop: 5}}><AiOutlinePhone /> {dataRoomID.userEntity.phoneNumber}</div>
             <div style={{marginTop: 5}}><CgMail /> {dataRoomID.userEntity.username}</div>
             <div><FiFacebook /><a href={dataRoomID.userEntity.facebook}> {dataRoomID.userEntity.facebook}</a></div>
-
             </div>
           </div>
           </Col>

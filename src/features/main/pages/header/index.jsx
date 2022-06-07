@@ -30,6 +30,7 @@ function MainLayout() {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
   //Modal đăng tin
   const [visibleAddRoom, setVisibleAddRoom] = useState(false);
   const showDrawerAddRoom = () => {
@@ -49,6 +50,7 @@ function MainLayout() {
     setIsModalVisibleAddRoom(false);
   };
 
+    //Modal đăng tin
   const logout = () => {
     localStorage.removeItem("accessToken")
     localStorage.removeItem("id")
@@ -63,8 +65,8 @@ function MainLayout() {
     <div className="container-fluid">
       <div className="header">
         <div className="logo">
-          <i className="fas fa-bolt"></i>
-          <a href="/">Room Social Network</a>
+        <i className="fas fa-bolt"></i>
+          <a href="/">Motel-Room</a>
         </div>
         <div className="mobileHidden">
           <Anchor targetOffset="65">
@@ -72,6 +74,7 @@ function MainLayout() {
             <Link href="/room-social-network/room-list" title="Phòng trọ" />
             <Link href="/about" title="Giới thiệu" />
             <Link href="/works" title="Liên hệ" />
+            <Link href="/room-social-network/room-share" title="Tìm người ở ghép"/>
           </Anchor>
         </div>
 
@@ -102,6 +105,7 @@ function MainLayout() {
                               <>
                                 {localStorage.getItem("role")!=2 && <><Button><Lik to='room-management/'>Quản lý tin đăng</Lik></Button> <br /></>}
                                 <Button><Lik to={`profile/${localStorage.getItem("id")}`} >Hồ sơ cá nhân </Lik></Button>
+                                <Button><Lik to={'room-wait'}>Danh sách phòng trọ đã lưu </Lik></Button>
                                 <br />                               
                                 <Button type='button' onClick={() => logout()}>Đăng xuất</Button>
                               </>

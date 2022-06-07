@@ -122,6 +122,30 @@ module.exports = function(app) {
     })
   );
   
+  app.use(
+    createProxyMiddleware("/waitinglist/user/", {
+      target: "http://localhost:8085",
+      secure: false,
+      changeOrigin: true
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/roomsharing/", {
+      target: "http://localhost:8085",
+      secure: false,
+      changeOrigin: true
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/sharingdetail/", {
+      target: "http://localhost:8085",
+      secure: false,
+      changeOrigin: true
+    })
+  );
+  
 
 
 

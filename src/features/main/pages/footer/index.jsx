@@ -7,7 +7,7 @@ function Footer() {
         <div className="footer">
             <div className="logo">
                 <i className="fas fa-bolt"></i>
-                <a href="/">Room Social Network</a>
+                <a href="/">Motel-Room</a>
             </div>
             <ul className="socials">
                 <li><a href="https://www.facebook.com/"><i className="fab fa-facebook-f"></i></a></li>
@@ -16,7 +16,7 @@ function Footer() {
                 <li><a href="https://www.pinterest.com/"><i className="fab fa-pinterest-p"></i></a></li>
                 <li><a href="https://www.instagram.com/"><i className="fab fa-instagram"></i></a></li>
             </ul>
-            <div className="copyright">Copyright &copy; 2022 DG5 TEAM FE | BATCH 9</div>
+            <div className="copyright">Copyright &copy; 2022 Thanh Cong | DG5</div>
             <BackTop>
                 <div className="goTop"><i className="fas fa-arrow-circle-up"></i></div>
             </BackTop>

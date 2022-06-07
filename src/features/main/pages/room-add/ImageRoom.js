@@ -52,11 +52,6 @@ function ImageRoom({onFinish3, handleChange, handleUpload, fileList, progress}) 
         setPreviewTitle(() => file.name || file.url.substring(file.url.lastIndexOf('/') + 1))
       };
 
-
-
-
-
-
     return (
         <>
             <Form
