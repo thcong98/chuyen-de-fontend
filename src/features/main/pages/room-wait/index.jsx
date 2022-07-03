@@ -4,6 +4,7 @@ import { Avatar, List } from 'antd';
 import { Link } from "react-router-dom";
 import { Button } from 'antd';
 import {DataContext} from '../../../../utils/DataContext'
+import { red } from "@ant-design/colors";
 
 function RoomWait() {
      //const [roomwait, setRoomwait] = useState();
@@ -57,13 +58,13 @@ function RoomWait() {
                     <List.Item>
                         <List.Item.Meta
                         avatar={<Avatar src={item.userEntity?.avatarUrl} />}
-                        title={item?.roomEntity?.descriptionRoom}
+                        title={item?.roomEntity?.titleRoom}
+                        description={item?.roomEntity?.descriptionRoom}
                         />
                     </List.Item>
                     </Link>
                     <Button type="primary" onClick={() => {handlexoa(item?.id)}}>Xóa</Button>
                 </div>
-                    <Button type="primary" dowload onClick={() => {handledowloadListWaiting(item?.userEntity?.id)}}>tải về</Button>
                 </>
                 )}
             />

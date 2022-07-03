@@ -116,7 +116,8 @@ function AllRoom(props) {
             style={{height: 420}}
           >
             <Link to={`/room-social-network/detail/${item.roomId}`} >
-            <Meta title={item.descriptionRoom} />
+            <Meta title={item.titleRoom} />
+            <Meta description={item.descriptionRoom}/>
             <div style={{marginTop: 5}}><BiTrip /> Diện tích: {item.capacity} m<sup>2</sup></div>
             <div><BiStar /> Đánh giá: ⭐️⭐️⭐️</div>
             <div>

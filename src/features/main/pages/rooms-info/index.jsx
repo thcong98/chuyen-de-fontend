@@ -87,7 +87,7 @@ function RoomsInfo(props) {
           >
           <Link to={`detail/${item.roomId}`} style={{ color: "black"}} >
             <Meta title={item.titleRoom} />
-            <Meta description={item.descriptionRoom} />
+            <Meta description={item.descriptionRoom} style={{ color: "black",lineHeight:1.4,height:16, fontSize: 14, WebkitLineClamp:1, WebkitBoxOrient:"vertical", overflow:"hidden",display:"block", display:'-webkit-box'}} />
             <div style={{marginTop: 5}}><BiTrip /> Diện tích: {item.capacity} m<sup>2</sup></div>
             <div><BiStar /> Đánh giá: ⭐️⭐️⭐️</div>
             <div>
