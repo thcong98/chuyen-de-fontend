@@ -107,33 +107,40 @@ function RoomDetail() {
             <Col span={12}>
           <div className='box' >
             <div className='titleHolder'><b>Chi tiết phòng trọ</b></div>
-            <div style={{marginLeft: 50, height: 180}}>
+            <div style={{marginLeft: 50, height: 200}}>
+            <div style={{color: '#cf2a27', textTransform: 'uppercase', fontWeight:'bold'}}> {dataRoomID.titleRoom} </div>
             <div> {dataRoomID.descriptionRoom} </div>
             <div style={{marginTop: 5}}><BiTrip /> Diện tích: {dataRoomID.capacity} m<sup>2</sup></div>
             <div><BiStar /> Đánh giá: ⭐️⭐️⭐️</div>
             <div>
               <BiMap /> {`${dataRoomID.wardId?.wardPrefix} ${dataRoomID.wardId?.wardName}, ${dataRoomID.districtId?.districtPrefix}, ${dataRoomID.districtId?.districtName}, ${dataRoomID.provinceEntity?.provinceName}`}
             </div>
+            
+            <Row>
+            <Col span={9}>
             <Button type="primary" style={{ background: "#8D0972", borderColor: "#8D0972", marginTop: 5,  marginBottom: 20}}>{dataRoomID.price}/tháng</Button>
-            </div>
+            </Col>
+            <Col span={8}>
+            <div style={{fontSize: '12px', marginTop: 10, fontStyle: "italic"}}>Ngày đăng: {dataRoomID?.timeRoom.slice(0,10)}</div>
+            </Col>
+            </Row>
+          </div>
           </div>
           </Col>
 
           <Col span={12}>
           <div className='box'>
             <div className='titleHolder'><b>Thông tin chủ trọ</b></div>
-            <div style={{marginLeft: 50, height: 180}}>
+            <div style={{marginLeft: 50, height: 200}}>
             <img className='imgavartar' src={dataRoomID.userEntity.avatarUrl} width={46} height={46}/>
             <span> {dataRoomID.userEntity.fullName} </span>
             <div style={{marginTop: 5}}><AiOutlinePhone /> {dataRoomID.userEntity.phoneNumber}</div>
             <div style={{marginTop: 5}}><CgMail /> {dataRoomID.userEntity.username}</div>
-            <div><FiFacebook /><a href={dataRoomID.userEntity.facebook}> {dataRoomID.userEntity.facebook}</a></div>
+            <div><FiFacebook /><a href={dataRoomID.userEntity.facebook}> {dataRoomID.userEntity.facebook}</a></div>   
             </div>
           </div>
           </Col>
           </Row>
-
-
 
           {/* <div className='marginTop' style={{marginTop: 100}}>
             <RoomsInfo title='Phòng tương thích' data={items} />

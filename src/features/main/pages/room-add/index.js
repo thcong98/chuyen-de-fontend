@@ -39,11 +39,15 @@ function RoomAdd () {
 
     const onFinish2 = (values) => {
       console.log('Received values of form: ', values);
-      const {price, capacity, desc} = values
+      const {price, capacity, desc, title} = values
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
       const newd = {
           "price": price, 
           "capacity": capacity,  
-          "descriptionRoom": desc
+          "descriptionRoom": desc,
+          "titleRoom": title,
+          "timeRoom": date
       }
       setNewRoom(pre => {return {...pre, ...newd}})
             setActiveKey('3') 

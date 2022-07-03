@@ -53,6 +53,21 @@ function InfoRoom({onFinish2}) {
          scrollToFirstError
          style={{marginTop: 20}}
       >
+               <Form.Item
+                    name="title"
+                    label="Tiêu đề: "
+                    rules={[
+                      { required: true, message: 'Vui lòng nhập tiêu đề!' },
+                       {
+                      min: 10,
+                      max: 50,
+                      message: "Số lượng ký tự >10, <50",
+                       }
+                    ]}
+                >
+                    <Input.TextArea rows={2} cols={100} />
+                </Form.Item>
+
                 <Form.Item
                     name="desc"
                     label="Mô tả: "
@@ -60,8 +75,8 @@ function InfoRoom({onFinish2}) {
                       { required: true, message: 'Vui lòng nhập mô tả!' },
                        {
                       min: 10,
-                      max: 100,
-                      message: "Số lượng ký tự >10, <100",
+                      max: 200,
+                      message: "Số lượng ký tự >10, <200",
                        }
                     ]}
                 >
