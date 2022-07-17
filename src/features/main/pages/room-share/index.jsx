@@ -2,9 +2,15 @@ import sharingService from "../../../../services/sharingService";
 import sharingDetailService from "../../../../services/sharingDetailService";
 import roomService from "../../../../services/roomService";
 import React, { useEffect, useState, useContext } from 'react';
-import { Avatar, List } from 'antd';
+import { Avatar, List, Card, Row } from 'antd';
 import { Link } from "react-router-dom";
 import { Button } from 'antd';
+import { Col } from "react-bootstrap";
+import "../../index.scss";
+import { BiMap, BiDollar, BiStar, BiTrip } from "react-icons/bi";
+import { CgMail } from "react-icons/cg";
+import { FiFacebook} from "react-icons/fi";
+import { AiOutlinePhone} from "react-icons/ai";
 
 function RoomShare() {
      const [roomshare, setRoomshare] = useState();
@@ -41,7 +47,7 @@ function RoomShare() {
     return roomshare && (
         <>
             <h1 style={{marginTop: 100}}>Danh sách phòng trọ tìm người ở ghép</h1>
-            <List
+            {/* <List
                 itemLayout="horizontal"
                 dataSource={roomshare}
                 renderItem={(item) => (
@@ -56,6 +62,9 @@ function RoomShare() {
                     Chi tiết phòng ở ghép
                     </Link>
                     </div>
+                    <div>
+                    {item.description}
+                    </div>
                     </div>
                     <List.Item>
                         <List.Item.Meta
@@ -68,7 +77,22 @@ function RoomShare() {
                     </List.Item>
                 </>
                 )}
-            />
+            /> */}
+            {roomshare.map(e => {
+                return <Row>
+                <Col sm={24}>
+                    <Card type="inner" title={e.roomEntity.titleRoom} extra={<Link to={`/room-social-network/detail/${e?.roomId}`} >Chi tiết</Link>}>
+                    <img className='imgavartar' src={e.sharingDetails[0].userEntity.avatarUrl} width={46} height={46}/>
+                    {e.description}
+                    <hr/>
+                    <span> {e.sharingDetails[0].userEntity.fullName} </span>
+                    <div style={{marginTop: 5}}><AiOutlinePhone /> {e.sharingDetails[0].userEntity.phoneNumber}</div>
+                    <div style={{marginTop: 5}}><CgMail /> {e.sharingDetails[0].userEntity.username}</div>
+                    <div><FiFacebook /><a href={e.sharingDetails[0].userEntity.facebook}> {e.sharingDetails[0].userEntity.facebook}</a></div>
+                    </Card>
+                </Col>
+                </Row>
+            })}
         </>
     )
 }

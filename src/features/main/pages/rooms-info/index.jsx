@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Modal, Form, Input, Alert } from 'antd';
 import { Card } from 'antd';
 import { BiMap, BiDollar, BiStar, BiTrip } from "react-icons/bi";
 import { RiHomeHeartFill} from "react-icons/ri";
@@ -74,10 +74,61 @@ function RoomsInfo(props) {
        });
     }
   }
+  //Xử lý sharing
+  const [form] = Form.useForm();
+  const [isModalVisibleSharing, setIsModalVisibleSharing] = useState(false);
+  const [alertMessage, setAlertMessage] = useState(0)
+  const showModalSharing = () => {
+    setIsModalVisibleSharing(true)
+  };
+  const handleOkSharing = () => {
+    setIsModalVisibleSharing(false);
+  };
+  const handleCancelSharing = () => {
+    setIsModalVisibleSharing(false);
+  };
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 6 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 14 },
+    },
+  };
+  const onFinish = (values) => {
+    console.log('Received values of form: ', values);
+    const {desc, roomId} = values
+    // const newd = {  
+    //     "description": desc
+    // }
+    //setNewRoom(pre => {return {...pre, ...newd}})
+    const dataroomshare = {
+      roomId: roomId,
+      description: desc,
+      sharingDetails: [
+          {
+              userId:localStorage.getItem("id"),
+              role: localStorage.getItem("role")
+          }
+      ]
+    }
+    sharingService.addsharing(dataroomshare) 
+     .then(function (response) {
+        console.log('Thanh cong');
+        setAlertMessage(1);
+        setTimeout(() => handleCancelSharing(),300)
+     })
+     .catch(function (error) {
+       console.log(error);
+     });
+  };
+
+
   var items = props.data;
   var a = props?.itemsAmount
   const roomsInfo = items.map((item, index) => {
-    
     return index < a && (
       <Col sm={8} key={index} xs={24} md={8} lg={8}>
           <Card
@@ -97,16 +148,51 @@ function RoomsInfo(props) {
             <div style={{display: 'inline-flex'}}>
             <Button type="primary" style={{ background: "#8D0972", borderColor: "#8D0972", marginTop: 5}}>{item.price}/tháng</Button>
             <Button onClick={() => {handletym(item.roomId)}} style={{ borderColor: "#ffff"}}>
-            <RiHomeHeartFill class={roomwait.some(i => i.roomId == item.roomId) && "red"} style={{marginLeft: 0, width: 30, height: 30 }} />
+            <RiHomeHeartFill class={roomwait?.some(i => i.roomId == item.roomId) && "red"} style={{marginLeft: 0, width: 30, height: 30 }} />
             </Button>
-            <Button onClick={() => handleshare(item.roomId, item.role)} style={{ borderColor: "#ffff"}}>
+            {/* <Button onClick={() => handleshare(item.roomId, item.role)} style={{ borderColor: "#ffff"}}>
             <FaSlideshare style={{marginLeft: 0, width: 30, height: 30 }} />
+            </Button> */}
+
+            <Button onClick={showModalSharing} type="primary" style={{ borderColor: "#ffff"}}> 
+              <FaSlideshare style={{marginLeft: 0, width: 30, height: 30 }} />
             </Button>
+            <Modal title="Share phòng" visible={isModalVisibleSharing} onOk={handleOkSharing} onCancel={handleCancelSharing} footer={null}>
+                    <Form
+                {...formItemLayout}
+                form={form}
+                name="roomadd"
+                onFinish={values => onFinish({...values, roomId: item.roomId})}
+                initialValues={{roomId: item.roomId}}
+                scrollToFirstError
+                style={{marginTop: 20}}
+              >
+              <Form.Item
+                            name="desc"
+                            label="Mô tả: "
+                            rules={[
+                              { required: true, message: 'Vui lòng nhập mô tả!' },
+                              {
+                              min: 10,
+                              max: 200,
+                              message: "Số lượng ký tự >10, <200",
+                              }
+                            ]}
+                        >
+                            <Input.TextArea rows={5} cols={100} />
+                        </Form.Item>
+                  <Button type="primary" htmlType="submit"  >
+                                Share
+                  </Button>
+                </Form>
+                {alertMessage == 1 && <Alert message="Share phòng thành công!" type="success" showIcon />}
+            </Modal>
             </div>
           </Card>
       </Col>
     )
   });
+  
   return (
     <div className="container-fluid">
       <div className="titleHolder">
